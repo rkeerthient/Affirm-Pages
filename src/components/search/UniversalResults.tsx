@@ -71,7 +71,6 @@ const ProdCategory_Section = ({
   CardComponent,
 }: SectionProps) => {
   const Card = CardComponent || StandardCard;
-  console.log("inn");
 
   return (
     <>
@@ -94,7 +93,6 @@ const SectionHeader = ({ title }: { title: string }) => {
 
 const IconsCard = ({ result }: CardProps<any>) => {
   const category = result.rawData;
-  console.log(category.name);
 
   return (
     <div className="border">

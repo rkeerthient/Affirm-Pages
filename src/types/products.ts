@@ -402,7 +402,6 @@ export default interface Product {
 	name: string,
 	c_brand?: EntityReference[],
 	c_parentCategory?: EntityReference[],
-	c_products?: EntityReference[],
 	c_soldAt?: EntityReference[],
 	photoGallery?: ComplexImage[],
 	keywords?: string[],

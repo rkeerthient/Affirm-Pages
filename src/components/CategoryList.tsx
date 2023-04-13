@@ -14,8 +14,6 @@ const CategoryList = ({
   category,
   handleSubCategoryClick,
 }: CategoryProps) => {
-  console.log(JSON.stringify(category));
-
   return (
     <div className="w-1/6 bg-white shadow overflow-y-auto max-h-[calc(100vh-64px)] z-50">
       <ul role="list" className="py-4 flex flex-col">

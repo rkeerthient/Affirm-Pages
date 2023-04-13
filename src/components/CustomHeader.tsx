@@ -70,7 +70,7 @@ const CustomHeader = ({ rootCategory }: HeaderProps) => {
 
         <nav aria-label="Top" className="mx-auto px-6 ">
           <div className="">
-            <div className="h-16 items-center justify-end flex gap-4">
+            <div className="h-16 items-center justify-between flex gap-4">
               <div className="flex flex-1 items-center lg:hidden">
                 <div>
                   <button
