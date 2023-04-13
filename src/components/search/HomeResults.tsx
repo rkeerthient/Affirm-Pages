@@ -35,22 +35,29 @@ const HomeResults = ({
   return (
     <>
       {!loading && (
-        <div className="space-y-8 pb-8 centered-container">
-          {data.map((item: any, index: any) => {
-            const { entityType, res } = item;
-            return (
-              <div className="flex flex-col" key={index}>
-                <div className="text-3xl font-semibold mb-8">{entityType} </div>
-                <div className=" overflow-hidden">
-                  <Carousel
-                    data={res.verticalResults.results}
-                    entityType={entityType}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <>
+          <div className="space-y-8 pb-8 centered-container ">
+            {data.map((item: any, index: any) => {
+              const { entityType, res } = item;
+              return (
+                <>
+                  <div className="flex flex-col  " key={index}>
+                    <div className="text-2xl font-semibold mb-8">
+                      {entityType}
+                    </div>
+                    <div className=" overflow-hidden">
+                      <Carousel
+                        data={res.verticalResults.results}
+                        entityType={entityType}
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                </>
+              );
+            })}
+          </div>
+        </>
       )}
     </>
   );
