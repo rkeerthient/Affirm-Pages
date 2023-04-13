@@ -4,11 +4,11 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import Ce_product from "../../types/products";
 
-type ProductCardProps = CardProps<any> & {
+type RetailCardProps = CardProps<any> & {
   autocomplete?: boolean;
 };
 
-const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
+const RetailCard = ({ result, autocomplete }: RetailCardProps) => {
   console.log(JSON.stringify(result));
 
   const product = result.rawData;
@@ -21,17 +21,14 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
           key={product.id}
           className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
         >
-          <div className="aspect-h-4 aspect-w-3 bg-white sm:aspect-none group-hover:opacity-75 sm:h-96">
-            <Image image={productImage} />
+          <div className="aspect-h-1 aspect-w-3 bg-white sm:aspect-none group-hover:opacity-75 sm:h-56">
+            <Image image={productImage} className="mx-auto" />
           </div>
           <div className="flex flex-1 flex-col space-y-2 p-4">
             <h3 className="text-sm font-medium text-gray-900">
               <span aria-hidden="true" className="  inset-0" />
               {product.name}
             </h3>
-            <p className="text-sm text-gray-500">
-              {product.richTextDescription}
-            </p>
             <div className="flex flex-1 flex-col justify-end">
               {product.price && (
                 <p className="text-sm">${product.price.value}</p>
@@ -49,4 +46,4 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
   );
 };
 
-export { ProductCard };
+export { RetailCard };

@@ -6,23 +6,23 @@ import {
   TemplateRenderProps,
   GetHeadConfig,
   HeadConfig,
-  TransformProps,
   TemplateConfig,
+  TransformProps,
 } from "@yext/pages";
-import { transformSiteData } from "../utils/transformSiteData";
-
+// import { transformSiteData } from "../utils/transformSiteData";
 import {
   provideHeadless,
   SearchHeadlessProvider,
 } from "@yext/search-headless-react";
-import HomeComponent from "../components/search/HomeComponent";
+import { transformSiteData } from "../utils/transformSiteData";
+import RetailResults from "../components/search/RetailResults";
 
 export const config: TemplateConfig = {
   stream: {
-    $id: "home_page",
-    fields: ["id", "slug", "name"],
+    $id: "Retail-pages",
+    fields: ["id", "name", "slug"],
     filter: {
-      entityIds: ["668312783750311009"],
+      entityIds: ["3714376899110131394"],
     },
     localization: {
       locales: ["en"],
@@ -34,12 +34,11 @@ export const config: TemplateConfig = {
 export const getPath: GetPath<TemplateRenderProps> = ({ document }) => {
   return document.slug ?? document.name;
 };
-
-export const getHeadConfig: GetHeadConfig<
-  TemplateRenderProps
-> = (): HeadConfig => {
+export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
+  document,
+}): HeadConfig => {
   return {
-    title: "Affirm",
+    title: `Affirm | ${document.name}`,
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
   };
@@ -50,7 +49,6 @@ export const transformProps: TransformProps<TemplateRenderProps> = async (
   data
 ) => {
   const { _site } = data.document;
-
   return {
     ...data,
     document: {
@@ -64,7 +62,7 @@ export const transformProps: TransformProps<TemplateRenderProps> = async (
  * This is the main template. It can have any name as long as it's the default export.
  * The props passed in here are the direct result from `getStaticProps`.
  */
-const Home: Template<TemplateRenderProps> = ({
+const RetailPage: Template<TemplateRenderProps> = ({
   document,
 }: TemplateRenderProps) => {
   const searcher = provideHeadless({
@@ -75,7 +73,7 @@ const Home: Template<TemplateRenderProps> = ({
 
   return (
     <SearchHeadlessProvider searcher={searcher}>
-      <HomeComponent
+      <RetailResults
         document={document}
         path={""}
         relativePrefixToRoot={""}
@@ -88,4 +86,4 @@ const Home: Template<TemplateRenderProps> = ({
   );
 };
 
-export default Home;
+export default RetailPage;

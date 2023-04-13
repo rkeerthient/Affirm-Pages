@@ -93,11 +93,12 @@ const CustomHeader = ({ rootCategory }: HeaderProps) => {
                   </button>
                 </div>
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-center">
                 <a href="/home">Home</a>
                 {!searchOpen && <CategoryPanel rootCategory={rootCategory} />}
+                <a href="/retail-page">Stores</a>
               </div>
-              <div className={twMerge("flex", searchOpen ? "col-span-2" : "")}>
+              {/* <div className={twMerge("flex", searchOpen ? "col-span-2" : "")}>
                 <div className="flex-1 items-center justify-end hidden lg:flex ">
                   <div className="my-auto max-w-xs w-full">
                     <SearchBar
@@ -112,7 +113,7 @@ const CustomHeader = ({ rootCategory }: HeaderProps) => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </nav>
