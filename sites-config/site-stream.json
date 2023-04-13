@@ -1,0 +1,25 @@
+{
+  "$id": "site-entity",
+  "filter": {
+    "entityIds": ["cat"]
+  },
+  "source": "knowledgeGraph",
+  "fields": [
+    "dm_directoryChildren.id",
+    "dm_directoryChildren.name",
+    "dm_directoryChildren.slug",
+    "dm_directoryChildren.dm_directoryChildren.id",
+    "dm_directoryChildren.dm_directoryChildren.name",
+    "dm_directoryChildren.dm_directoryChildren.slug",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug"
+  ],
+  "localization": {
+    "locales": ["en"],
+    "primary": false
+  }
+}
