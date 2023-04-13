@@ -207,9 +207,9 @@ const SearchBar = ({
     verticalKey?: string;
     query?: string;
   }) => {
-    // if the query equals the string "track my order", redirect to this url: https://www.gnc.com/check-order
+    // if the query equals the string "track my order", redirect to this url: https://www.Affirm.com/check-order
     if (searchEventData.query === "track my order") {
-      window.location.href = "https://www.gnc.com/check-order";
+      window.location.href = "https://www.Affirm.com/check-order";
       return;
     }
 

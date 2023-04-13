@@ -13,7 +13,6 @@ import PageLayout from "../components/page-layout";
 import { transformSiteData } from "../utils/transformSiteData";
 import { SearchResults } from "../components/search/SearchResults";
 import { HomeResults } from "../components/search/HomeResults";
-import { HomeResults2 } from "../components/search/HomeResults2";
 import {
   CardProps,
   DirectAnswer,
@@ -49,7 +48,7 @@ export const getHeadConfig: GetHeadConfig<
   TemplateRenderProps
 > = (): HeadConfig => {
   return {
-    title: "GNC",
+    title: "Affirm",
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
   };
