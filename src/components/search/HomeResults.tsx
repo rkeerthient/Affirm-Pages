@@ -23,8 +23,7 @@ const HomeResults = ({
         searchActions.setVertical(item);
         searchActions.setQuery("featured");
         return searchActions.executeVerticalQuery().then((res) => {
-          console.log(JSON.stringify(res));
-
+          searchActions.setQuery("");
           return { entityType: initialNames[index], res };
         });
       });
@@ -46,7 +45,7 @@ const HomeResults = ({
                 <span key={index}>
                   <div className="flex flex-col">
                     <div className="text-2xl font-semibold my-8">
-                     Featured {entityType}
+                      Featured {entityType}
                     </div>
                     <div className=" overflow-hidden">
                       <Carousel
