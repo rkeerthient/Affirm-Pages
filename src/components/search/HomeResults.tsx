@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSearchActions } from "@yext/search-headless-react";
+import { Matcher, useSearchActions } from "@yext/search-headless-react";
 import { useEffect, useState } from "react";
 import { Image } from "@yext/pages/components";
 import Carousel from "../Carousel";
@@ -21,7 +21,10 @@ const HomeResults = ({
     {
       let x = initialVerticalKey.map((item, index: number) => {
         searchActions.setVertical(item);
+        searchActions.setQuery("featured");
         return searchActions.executeVerticalQuery().then((res) => {
+          console.log(JSON.stringify(res));
+
           return { entityType: initialNames[index], res };
         });
       });
@@ -43,7 +46,7 @@ const HomeResults = ({
                 <span key={index}>
                   <div className="flex flex-col">
                     <div className="text-2xl font-semibold my-8">
-                      {entityType}
+                     Featured {entityType}
                     </div>
                     <div className=" overflow-hidden">
                       <Carousel
