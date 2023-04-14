@@ -53,6 +53,10 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
               setSidePanels([]);
               setActiveCategory(category.name || "");
             }}
+            onClick={(e: any) => {
+              e.preventDefault();
+              window.location.href = "/shop";
+            }}
           >
             {category.name}
           </Popover.Button>
@@ -68,7 +72,7 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm z-50">
+          <Popover.Panel className="absolute left-8inset-x-0 top-full text-gray-500 sm:text-sm z-50">
             <div
               className="relative flex"
               onMouseLeave={() => {
@@ -104,11 +108,10 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
   return (
     <>
       {activeCategory !== "" && (
-        // TODO: fade out
         <div className="fixed top-16 bottom-0 left-0 right-0 bg-gray-500 z-10 h-full opacity-40" />
       )}
       <div className="hidden h-full lg:flex">
-        <Popover.Group className="ml-2">
+        <Popover.Group>
           <div className="flex h-full justify-center space-x-8">
             {rootCategory?.subCategories?.map((category) => {
               return (

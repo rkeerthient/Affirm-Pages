@@ -2,10 +2,10 @@ import { TemplateRenderProps } from "@yext/pages/*";
 import { useSearchActions } from "@yext/search-headless-react";
 import {
   AppliedFilters,
+  LocationBias,
   Pagination,
   ResultsCount,
   SearchBar,
-  StandardCard,
   StandardFacets,
   VerticalResults,
 } from "@yext/search-ui-react";
@@ -26,31 +26,30 @@ const RetailResults = ({ document }: TemplateRenderProps) => {
   });
   return (
     <PageLayout _site={_site}>
-      <div className="flex justify-center px-4 py-6">
-        <div className="w-full max-w-7xl home">
-          <SearchBar
-            customCssClasses={{ searchBarContainer: "!rounded-none	" }}
-            hideRecentSearches={true}
-            placeholder="Find Products Near You"
-          />
-          <div className="flex gap-16 pb-8">
-            <StandardFacets />
-            <div className="flex-col">
+      <div className="max-w-7xl mx-auto">
+        <SearchBar hideRecentSearches={true} />
+        <div className="flex">
+          <div className="w-56 shrink-0 mr-5">
+            <StandardFacets
+              customCssClasses={{
+                standardFacetsContainer: "max-h-screen  customContainer",
+              }}
+            />
+          </div>
+          <div className="flex-grow">
+            <div className="flex items-baseline">
               <ResultsCount />
-              <AppliedFilters
-                customCssClasses={{
-                  clearAllButton: "hidden",
-                  appliedFiltersContainer: "pb-4",
-                }}
-              />
-              <VerticalResults
-                CardComponent={RetailCard}
-                customCssClasses={{
-                  verticalResultsContainer:
-                    "grid grid-cols-1 md:grid-cols-3 md:gap-4 md:pb-4",
-                }}
-              />
+              <AppliedFilters />
+            </div>
+            <VerticalResults
+              customCssClasses={{
+                verticalResultsContainer: "grid grid-cols-3 gap-4",
+              }}
+              CardComponent={RetailCard}
+            />
+            <div className="mt-8">
               <Pagination />
+              <LocationBias />
             </div>
           </div>
         </div>

@@ -39,7 +39,7 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
           <div className="font-semibold px-32">{props.label}</div>
           <Carousel data={results} entityType={""} />
         </div>
-        <hr />
+        <hr className="my-4" />
       </>
     );
   };
@@ -136,7 +136,7 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
           src="https://images.ctfassets.net/4rc1asww3mw7/5fRMSFxH54kYroaBsAECc4/182142d27f94d63474ca81ea83f50733/5120_2204-Affirm-Day-10223-10227__1_.jpg?q=80&fm=avif"
           alt=""
         />
-        <div className="w-2/4 top-1/4 left-8 absolute">
+        <div className="w-2/4 top-1/4 left-16 absolute">
           <div className="w-2/3">
             <h1 className="text-3xl  text-white">It’s better in the app</h1>
             <h2 className="text2xl text-white my-4">

@@ -40,9 +40,9 @@ const HomeResults = ({
             {data.map((item: any, index: any) => {
               const { entityType, res } = item;
               return (
-                <>
-                  <div className="flex flex-col  " key={index}>
-                    <div className="text-2xl font-semibold mb-8">
+                <span key={index}>
+                  <div className="flex flex-col">
+                    <div className="text-2xl font-semibold my-8">
                       {entityType}
                     </div>
                     <div className=" overflow-hidden">
@@ -52,8 +52,8 @@ const HomeResults = ({
                       />
                     </div>
                   </div>
-                  <hr />
-                </>
+                  {index !== data.length - 1 && <hr className="my-10" />}
+                </span>
               );
             })}
           </div>

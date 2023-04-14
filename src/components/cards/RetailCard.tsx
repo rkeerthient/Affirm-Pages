@@ -9,8 +9,6 @@ type RetailCardProps = CardProps<any> & {
 };
 
 const RetailCard = ({ result, autocomplete }: RetailCardProps) => {
-  console.log(JSON.stringify(result));
-
   const product = result.rawData;
   const productImage = product.primaryPhoto;
 
@@ -21,8 +19,11 @@ const RetailCard = ({ result, autocomplete }: RetailCardProps) => {
           key={product.id}
           className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white"
         >
-          <div className="aspect-h-1 aspect-w-3 bg-white sm:aspect-none group-hover:opacity-75 sm:h-56">
-            <Image image={productImage} className="mx-auto" />
+          <div className="aspect-h-1 aspect-w-3 bg-white sm:aspect-none group-hover:opacity-75 sm:h-56 m-auto flex items-center">
+            <Image
+              image={productImage}
+              className="p-4 m-auto !object-contain"
+            />
           </div>
           <div className="flex flex-1 flex-col space-y-2 p-4">
             <h3 className="text-sm font-medium text-gray-900">

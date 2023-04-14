@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .centered-container {
-  @apply mx-auto px-5 md:px-14 max-w-screen-xl;
+  @apply mx-auto px-5 md:px-14 max-w-screen-2xl;
 }
 
 .section {
@@ -48,7 +48,7 @@
 
 .slick-prev::before,
 .slick-next::before {
-  color: orange !important;
+  color: #002652 !important;
   font-size: 2rem !important;
 }
 
@@ -58,6 +58,7 @@
   height: 2.5rem;
   z-index: 2;
   top: 40% !important;
+  padding: 1em;
 }
 
 .slick-list {
@@ -97,4 +98,18 @@
 
 .univ .slick-track {
   margin-left: 0;
+}
+
+.Header-logo--7o3IK {
+  display: block;
+  height: 31.94px;
+  margin-bottom: 10px;
+  margin-right: 24px;
+  width: 80px;
+}
+.Header-logo--7o3IK .svg-fill {
+  transition: fill 0.2s linear;
+}
+.Header-logo--7o3IK .rainbow {
+  fill: #4a4af4;
 }
