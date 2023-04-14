@@ -8,6 +8,7 @@ type DepartmentListProps = {
 
 const DepartmentList = ({ departmentLinks }: DepartmentListProps) => {
   if (!departmentLinks) return <></>;
+  console.log(JSON.stringify(departmentLinks));
 
   const [isOpen, setIsOpen] = useState(false);
 

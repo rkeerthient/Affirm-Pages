@@ -4,9 +4,10 @@ import {
   provideHeadless,
   Result,
   useSearchActions,
+  useSearchState,
   VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Breadcrumbs, Link } from "../Breadcrumbs";
 import {
   LocationBias,
@@ -14,7 +15,6 @@ import {
   ResultsCount,
   AppliedFilters,
   Pagination,
-  VerticalResults,
   SearchBar,
   DropdownItem,
   FocusedItemData,
@@ -25,6 +25,9 @@ import { DepartmentList } from "./DepartmentList";
 import searchConfig from "../searchConfig";
 import classNames from "classnames";
 import Product from "../../types/products";
+import { VerticalResultss } from "./VerticalResults";
+import { UniversalResults, universalResultsConfig } from "./UniversalResults";
+import { VerticalNavigator } from "./VerticalNavigator";
 
 type SearchResultsProps = {
   initialFilter?: FieldValueStaticFilter;
@@ -36,6 +39,10 @@ type SearchResultsProps = {
 };
 
 const SearchResults = ({
+  initialFilter,
+  initialVerticalKey,
+  categoryName,
+  categoryDescription,
   breadcrumbLinks,
   subCategoryLinks,
 }: SearchResultsProps) => {
@@ -44,6 +51,60 @@ const SearchResults = ({
     ...searchConfig,
     headlessId: "visual-autocomplete",
   });
+  const [urlQuery, setUrlQuery] = useState<string | null>(null);
+  const universalResults = useSearchState((state) => state.universal.verticals);
+  const isUniversalSearch = useSearchState(
+    (state) => state.meta.searchType === "universal"
+  );
+  const verticalKey = useSearchState((state) => state.vertical.verticalKey);
+  const [verticals, setVerticals] = useState<
+    {
+      label: string;
+      verticalKey?: string;
+      count?: number;
+    }[]
+  >([{ label: "All" }]);
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search).get("query");
+    if (query) {
+      searchActions.setQuery(query);
+      setUrlQuery(query);
+    }
+    if (initialVerticalKey) {
+      searchActions.setVertical(initialVerticalKey);
+      initialFilter &&
+        searchActions.setStaticFilters([
+          { filter: initialFilter, selected: true },
+        ]);
+      searchActions.executeVerticalQuery();
+    } else {
+      searchActions.setRestrictVerticals(Object.keys(universalResultsConfig));
+      searchActions.setUniversalLimit({
+        categories: 5,
+        products: 4,
+        articles: 3,
+      });
+      searchActions.executeUniversalQuery();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (universalResults) {
+      const newVerticals = universalResults.map((verticalResults) => {
+        const label =
+          verticalResults.verticalKey[0].toUpperCase() +
+          verticalResults.verticalKey.slice(1).toLowerCase();
+
+        return {
+          label,
+          verticalKey: verticalResults.verticalKey,
+          count: verticalResults.resultsCount,
+        };
+      });
+      setVerticals([{ label: "All" }, ...newVerticals]);
+    }
+  }, [universalResults]);
+
   const renderEntityPreviews: RenderEntityPreviews = (
     autocompleteLoading,
     verticalKeyToResults: Record<string, VerticalResultsData>,
@@ -58,7 +119,6 @@ const SearchResults = ({
   ): any => {
     const productResults = verticalKeyToResults["products"]
       ?.results as unknown as Result<Product>[];
-    console.log(productResults);
 
     return productResults ? (
       <div
@@ -87,10 +147,8 @@ const SearchResults = ({
       </div>
     ) : null;
   };
-  useEffect(() => {
-    searchActions.setVertical("products");
-    searchActions.executeVerticalQuery();
-  }, []);
+  const isLoading = useSearchState((state) => state.searchStatus.isLoading);
+
   return (
     <div className="p-4">
       <div className="max-w-7xl mx-auto">
@@ -104,35 +162,19 @@ const SearchResults = ({
             entityPreviewsDebouncingTime: 500,
           }}
         />
-        {breadcrumbLinks && breadcrumbLinks.length >= 2 && (
-          <Breadcrumbs links={breadcrumbLinks} />
-        )}
         <div className="flex">
-          <div className="w-56 shrink-0 mr-5">
-            <DepartmentList departmentLinks={subCategoryLinks} />
-            <div className="w-full h-px bg-gray-200 my-4" />
-            <StandardFacets
-              customCssClasses={{
-                standardFacetsContainer: "max-h-screen  customContainer",
-              }}
-            />
-          </div>
           <div className="flex-grow">
-            <div className="flex items-baseline">
-              <ResultsCount />
-              <AppliedFilters />
-            </div>
-            <VerticalResults
-              customCssClasses={{
-                verticalResultsContainer: "grid grid-cols-3 gap-4",
-              }}
-              CardComponent={ProductCard}
-            />
-
-            <div className="mt-8">
-              <Pagination />
-              <LocationBias />
-            </div>
+            {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
+            {!initialFilter && <VerticalNavigator verticals={verticals} />}
+            {isUniversalSearch && <UniversalResults />}
+            {verticalKey && (
+              <VerticalResultss
+                categoryName={categoryName}
+                categoryDescription={categoryDescription}
+                verticalKey={verticalKey}
+                subCategoryLinks={subCategoryLinks}
+              />
+            )}
           </div>
         </div>
       </div>
