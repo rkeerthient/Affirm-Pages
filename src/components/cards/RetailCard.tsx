@@ -21,6 +21,7 @@ const RetailCard = ({ result, autocomplete }: RetailCardProps) => {
         >
           <div className="aspect-h-1 aspect-w-3 bg-white sm:aspect-none group-hover:opacity-75 sm:h-56 m-auto flex items-center">
             <Image
+              style={{ maxHeight: "250px" }}
               image={productImage}
               className="p-4 m-auto !object-contain"
             />
