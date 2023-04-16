@@ -10,18 +10,11 @@ import {
 import { useEffect, useState } from "react";
 import { Breadcrumbs, Link } from "../Breadcrumbs";
 import {
-  LocationBias,
-  StandardFacets,
-  ResultsCount,
-  AppliedFilters,
-  Pagination,
   SearchBar,
   DropdownItem,
   FocusedItemData,
   RenderEntityPreviews,
 } from "@yext/search-ui-react";
-import { ProductCard } from "../cards/ProductCard";
-import { DepartmentList } from "./DepartmentList";
 import searchConfig from "../searchConfig";
 import classNames from "classnames";
 import Product from "../../types/products";

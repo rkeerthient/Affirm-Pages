@@ -2,15 +2,10 @@ import * as React from "react";
 import {
   AppliedFilters,
   LocationBias,
-  NumericalFacets,
   Pagination,
-  ResultsCount,
-  StandardCard,
   StandardFacets,
   VerticalResults,
-  VerticalResults as VR,
 } from "@yext/search-ui-react";
-import { universalResultsConfig } from "./UniversalResults";
 import { useSearchState } from "@yext/search-headless-react";
 import { DepartmentList } from "./DepartmentList";
 import { Link } from "../Breadcrumbs";
@@ -67,7 +62,7 @@ const VerticalResultss = ({
           )}
         </div>
         <div className="flex justify-between">
-          <AppliedFilters hiddenFields={["subCategoryLinks"]}></AppliedFilters>
+          <AppliedFilters></AppliedFilters>
         </div>
 
         <VerticalResults
