@@ -13,6 +13,7 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { ProductCard } from "../cards/ProductCard";
 import { SortDropdown } from "./SortDropdown";
+import { useEffect } from "react";
 
 type VerticalResultsProps = {
   verticalKey: string;
@@ -30,7 +31,30 @@ const VerticalResultss = ({
   const [showResults, setShowResults] = useState(false);
 
   const resultsCount = useSearchState((state) => state.vertical.resultsCount);
+  useEffect(() => {
+    const appliedFiltersLabel = document.querySelectorAll(
+      '[aria-label="Applied filters to current search"]>div>div'
+    ) as any as Array<HTMLElement>;
+    const parentDiv = document.querySelector<any>(
+      '[aria-label="Applied filters to current search"]'
+    );
+    const totalAppliedFiltersLabel = document.querySelectorAll<HTMLElement>(
+      '[aria-label="Applied filters to current search"] > div'
+    );
 
+    parentDiv &&
+    totalAppliedFiltersLabel &&
+    totalAppliedFiltersLabel.length <= 1
+      ? parentDiv && parentDiv.style.setProperty("display", "none")
+      : parentDiv && parentDiv.style.setProperty("display", "flex");
+
+    appliedFiltersLabel &&
+      appliedFiltersLabel.forEach(
+        (item: any) =>
+          !item.innerHTML &&
+          item.parentNode.style.setProperty("display", "none")
+      );
+  });
   return (
     <div className="flex">
       <div className="w-1/5 shrink-0 mr-5 ">
@@ -62,7 +86,7 @@ const VerticalResultss = ({
           )}
         </div>
         <div className="flex justify-between">
-          <AppliedFilters></AppliedFilters>
+          <AppliedFilters />
         </div>
 
         <VerticalResults
