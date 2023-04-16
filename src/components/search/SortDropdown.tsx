@@ -10,22 +10,6 @@ import {
 } from "@yext/search-headless-react";
 
 const sortConfig: Record<string, { label: string; sortBy: SortBy }> = {
-  price_desc: {
-    label: "Price: High to Low",
-    sortBy: {
-      field: "c_salePrice",
-      direction: Direction.Descending,
-      type: SortType.Field,
-    },
-  },
-  price_asc: {
-    label: "Price: Low to High",
-    sortBy: {
-      field: "c_salePrice",
-      direction: Direction.Ascending,
-      type: SortType.Field,
-    },
-  },
   alpha_asc: {
     label: "Name: A-Z",
     sortBy: {
@@ -42,19 +26,19 @@ const sortConfig: Record<string, { label: string; sortBy: SortBy }> = {
       type: SortType.Field,
     },
   },
-  rating_asc: {
-    label: "Rating: Low to High",
+  price_desc: {
+    label: "Price: High to Low",
     sortBy: {
-      field: "c_rating",
-      direction: Direction.Ascending,
+      field: "price.value",
+      direction: Direction.Descending,
       type: SortType.Field,
     },
   },
-  rating_desc: {
-    label: "Rating: High to Low",
+  price_asc: {
+    label: "Price: Low to High",
     sortBy: {
-      field: "c_rating",
-      direction: Direction.Descending,
+      field: "price.value",
+      direction: Direction.Ascending,
       type: SortType.Field,
     },
   },
@@ -66,7 +50,7 @@ const sortConfig: Record<string, { label: string; sortBy: SortBy }> = {
   },
 };
 
-function classNames(...classes) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
