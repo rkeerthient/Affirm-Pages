@@ -85,9 +85,9 @@ const VerticalResultss = ({
             </>
           )}
         </div>
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <AppliedFilters />
-        </div>
+        </div> */}
 
         <VerticalResults
           customCssClasses={{
