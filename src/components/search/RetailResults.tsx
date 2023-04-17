@@ -6,6 +6,7 @@ import {
   Pagination,
   ResultsCount,
   SearchBar,
+  SpellCheck,
   StandardFacets,
   VerticalResults,
 } from "@yext/search-ui-react";
@@ -37,6 +38,7 @@ const RetailResults = ({ document }: TemplateRenderProps) => {
             />
           </div>
           <div className="flex-grow">
+            <SpellCheck></SpellCheck>
             <div className="flex items-baseline">
               <ResultsCount />
               <AppliedFilters />

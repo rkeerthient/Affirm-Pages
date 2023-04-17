@@ -3,6 +3,7 @@ import {
   AppliedFilters,
   LocationBias,
   Pagination,
+  SpellCheck,
   StandardFacets,
   VerticalResults,
 } from "@yext/search-ui-react";
@@ -67,6 +68,7 @@ const VerticalResultss = ({
         />
       </div>
       <div className="flex-grow ">
+        <SpellCheck></SpellCheck>
         <div className={twMerge(verticalKey === "products" && " ")}>
           {categoryName !== "home" && (
             <>
@@ -88,14 +90,12 @@ const VerticalResultss = ({
         {/* <div className="flex justify-between">
           <AppliedFilters />
         </div> */}
-
         <VerticalResults
           customCssClasses={{
             verticalResultsContainer: "grid grid-cols-3 gap-4",
           }}
           CardComponent={ProductCard}
         />
-
         <div className="mt-8">
           <Pagination />
           <LocationBias />
