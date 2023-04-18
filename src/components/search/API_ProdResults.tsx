@@ -122,7 +122,7 @@ const API_ProdResults = ({ document }: TemplateRenderProps) => {
             entityPreviewSearcher: entityPreviewSearcher,
             includedVerticals: ["api_products"],
             renderEntityPreviews: renderEntityPreviews,
-            universalLimit: { products: 4 },
+            universalLimit: { api_products: 4 },
             entityPreviewsDebouncingTime: 500,
           }}
         />
