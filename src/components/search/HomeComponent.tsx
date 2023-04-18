@@ -130,15 +130,20 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
                 <p className="mb-4 font-bold">Products(API)</p>
                 <div className="grid grid-cols-4 gap-4">
                   {api_productResults.map((result) => (
-                    <div key={result.id} className="mb-4">
-                      {result.rawData.photoGallery && (
-                        <img
-                          src={result.rawData.photoGallery[1].image.url}
-                          alt=""
-                          className="h-32 w-32 mx-auto"
-                        />
-                      )}
-                      <div className="text-sm">{result.name}</div>
+                    <div
+                      key={result.id}
+                      className="mb-4 border border-black p-2"
+                    >
+                      <a href={result.rawData.slug}>
+                        {result.rawData.photoGallery && (
+                          <img
+                            src={result.rawData.photoGallery[1].image.url}
+                            alt=""
+                            className="h-32 w-32 mx-auto"
+                          />
+                        )}
+                        <div className="text-sm">{result.name}</div>
+                      </a>
                     </div>
                   ))}
                 </div>

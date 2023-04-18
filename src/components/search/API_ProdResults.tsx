@@ -60,6 +60,7 @@ const API_ProdResults = ({ document }: TemplateRenderProps) => {
             key={result.rawData.id}
             value={result.rawData.name}
             ariaLabel={dropdownItemProps.ariaLabel}
+            className="mb-4 border border-black p-2"
           >
             <a href={result.rawData.slug}>
               {result.rawData.photoGallery && (
