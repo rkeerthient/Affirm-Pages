@@ -114,7 +114,8 @@ const CustomHeader = ({ rootCategory }: HeaderProps) => {
                   <div className="mx-4">|</div>
                 </div>
                 <div className="flex">
-                  <CategoryPanel rootCategory={rootCategory} />
+                  {/* <CategoryPanel rootCategory={rootCategory} /> */}
+                  <a href="/products-results">Products</a>
                   <div className="mx-4">|</div>
                 </div>
                 <div className="flex">

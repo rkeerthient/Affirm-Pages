@@ -26,7 +26,9 @@ export interface EntityReference {
 
 export default interface Ce_brand {
 	primaryPhoto?: ComplexImage,
+	slug?: string,
 	name: string,
 	c_brand?: EntityReference[],
+	c_featured?: boolean,
 	id: string,
 }

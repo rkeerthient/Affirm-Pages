@@ -149,7 +149,7 @@ const SearchResults = ({
           hideRecentSearches={true}
           visualAutocompleteConfig={{
             entityPreviewSearcher: entityPreviewSearcher,
-            includedVerticals: ["products"],
+            includedVerticals: ["api_products"],
             renderEntityPreviews: renderEntityPreviews,
             universalLimit: { products: 4 },
             entityPreviewsDebouncingTime: 500,

@@ -28,6 +28,7 @@ export default interface Ce_store {
 	landingPageUrl?: string,
 	primaryPhoto?: ComplexImage,
 	name: string,
+	c_featured?: boolean,
 	c_soldAt?: EntityReference[],
 	id: string,
 }
