@@ -25,6 +25,7 @@ import classNames from "classnames";
 import Product from "../../types/products";
 import Ce_brand from "../../types/brands";
 import { TemplateRenderProps } from "@yext/pages";
+import API_Product from "../../types/api_products";
 
 const HomeComponent = ({ document }: TemplateRenderProps) => {
   const searchActions = useSearchActions();
@@ -64,8 +65,12 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
       ariaLabel: (value: string) => string;
     }
   ): any => {
+    console.log(JSON.stringify(verticalKeyToResults));
+
     const productResults = verticalKeyToResults["products"]
       ?.results as unknown as Result<Product>[];
+    const api_productResults = verticalKeyToResults["api_products"]
+      ?.results as unknown as Result<any>[];
     const brandResults = verticalKeyToResults["brands"]
       ?.results as unknown as Result<Ce_brand>[];
     const orderedKeys = Object.keys(verticalKeyToResults);
@@ -73,7 +78,8 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
       (acc, vertical) => acc + vertical.results.length,
       0
     );
-    return productResults ? (
+
+    return productResults || api_productResults ? (
       <div
         className={classNames("flex flex-col gap-2", {
           "opacity-50": autocompleteLoading,
@@ -118,6 +124,27 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
               </div>
             );
           }
+          if (key === "api_products" && api_productResults) {
+            return (
+              <div key="api_products" className="p-4 border-right-2">
+                <p className="mb-4 font-bold">Products(API)</p>
+                <div className="grid grid-cols-4 gap-4">
+                  {api_productResults.map((result) => (
+                    <div key={result.id} className="mb-4">
+                      {result.rawData.photoGallery && (
+                        <img
+                          src={result.rawData.photoGallery[1].image.url}
+                          alt=""
+                          className="h-32 w-32 mx-auto"
+                        />
+                      )}
+                      <div className="text-sm">{result.name}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          }
         })}
       </div>
     ) : null;
@@ -150,9 +177,9 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
             hideRecentSearches={true}
             visualAutocompleteConfig={{
               entityPreviewSearcher: entityPreviewSearcher,
-              includedVerticals: ["products", "brands"],
+              includedVerticals: ["products", "brands", "api_products"],
               renderEntityPreviews: renderEntityPreviews,
-              universalLimit: { products: 4 },
+              universalLimit: { products: 4, api_products: 4 },
               entityPreviewsDebouncingTime: 500,
             }}
           />
@@ -181,6 +208,11 @@ const HomeComponent = ({ document }: TemplateRenderProps) => {
                       CardComponent: customUnivCard,
                       SectionComponent: GridSection,
                       label: "Products",
+                    },
+                    api_products: {
+                      CardComponent: customUnivCard,
+                      SectionComponent: GridSection,
+                      label: "Products(API)",
                     },
                     brands: {
                       CardComponent: customUnivCard,

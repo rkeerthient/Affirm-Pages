@@ -106,6 +106,11 @@ export const universalResultsConfig = {
     SectionComponent: ProductSection,
     label: <SectionHeader title="PRODUCTS" />,
   },
+  api_products: {
+    CardComponent: ProductCard,
+    SectionComponent: ProductSection,
+    label: <SectionHeader title="PRODUCTS(API)" />,
+  },
   articles: {
     CardComponent: ArticleCard,
     SectionComponent: ArticleSection,
