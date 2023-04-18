@@ -42,7 +42,6 @@ const VerticalResultss = ({
     const totalAppliedFiltersLabel = document.querySelectorAll<HTMLElement>(
       '[aria-label="Applied filters to current search"] > div'
     );
-    //test
     parentDiv &&
     totalAppliedFiltersLabel &&
     totalAppliedFiltersLabel.length <= 1
