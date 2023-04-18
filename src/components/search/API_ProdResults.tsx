@@ -7,6 +7,7 @@ import {
 } from "@yext/search-headless-react";
 import {
   AppliedFilters,
+  DropdownItem,
   FocusedItemData,
   LocationBias,
   Pagination,
@@ -19,14 +20,11 @@ import {
 } from "@yext/search-ui-react";
 import * as React from "react";
 import { useEffect } from "react";
-import { RetailCard } from "../cards/RetailCard";
-import { ProductCard } from "../cards/ProductCard";
 import PageLayout from "../page-layout";
 import { API_ProdCard } from "../cards/API_ProdCard";
-import Ce_brand from "../../types/brands";
 import searchConfig from "../searchConfig";
 import classNames from "classnames";
-import Product from "../../types/products";
+import API_Product from "../../types/api_products";
 
 const API_ProdResults = ({ document }: TemplateRenderProps) => {
   const { _site } = document;
@@ -48,62 +46,33 @@ const API_ProdResults = ({ document }: TemplateRenderProps) => {
       ariaLabel: (value: string) => string;
     }
   ): any => {
-    const productResults = verticalKeyToResults["products"]
-      ?.results as unknown as Result<Product>[];
+    const productResults = verticalKeyToResults["api_products"]
+      ?.results as unknown as Result<API_Product>[];
 
-    const brandResults = verticalKeyToResults["brands"]
-      ?.results as unknown as Result<Ce_brand>[];
-    const orderedKeys = Object.keys(verticalKeyToResults);
-    const totalResultCount = Object.values(verticalKeyToResults).reduce(
-      (acc, vertical) => acc + vertical.results.length,
-      0
-    );
     return productResults ? (
       <div
-        className={classNames("flex flex-col gap-2", {
+        className={classNames("grid grid-cols-4 px-8 gap-8", {
           "opacity-50": autocompleteLoading,
         })}
       >
-        {orderedKeys.map((key) => {
-          if (key === "brands" && brandResults) {
-            return (
-              <div key="brands" className="p-4 border-right-2">
-                <p className="mb-4 font-bold">Brands</p>
-                {brandResults.map((result) => (
-                  <div key={result.id} className="mb-4">
-                    {/* <a
-                      className=" text-sm hover:underline"
-                      href={result?.rawData?.slug}
-                    > */}
-                    {result.name}
-                    {/* </a> */}
-                  </div>
-                ))}
-              </div>
-            );
-          }
-          if (key === "api_products" && brandResults) {
-            return (
-              <div key="api_products" className="p-4 border-right-2">
-                <p className="mb-4 font-bold">Products</p>
-                <div className="grid grid-cols-4 gap-4">
-                  {productResults.map((result) => (
-                    <div key={result.id} className="mb-4">
-                      {result.rawData.photoGallery && (
-                        <img
-                          src={result.rawData?.photoGallery[2]?.image.url}
-                          alt=""
-                          className="h-32 w-32 mx-auto"
-                        />
-                      )}
-                      <div className="text-sm">{result.name}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          }
-        })}
+        {productResults.map((result, i) => (
+          <DropdownItem
+            key={result.rawData.id}
+            value={result.rawData.name}
+            ariaLabel={dropdownItemProps.ariaLabel}
+          >
+            <a href={result.rawData.slug}>
+              {result.rawData.photoGallery && (
+                <img
+                  src={result.rawData.photoGallery[1].image.url}
+                  alt=""
+                  className="h-32 w-32 mx-auto"
+                />
+              )}
+              <div className="text-sm">{result.name}</div>
+            </a>
+          </DropdownItem>
+        ))}
       </div>
     ) : null;
   };
